@@ -1,11 +1,31 @@
-import { Logger as PinoInstance, pino } from 'pino';
+import { Logger as PinoInstance, pino, transport } from 'pino';
 import { Logger } from './logger.interface.js';
+import {resolve} from 'node:path';
+
+const LOG_FILE_PATH = 'logs/rest.log';
 
 export class PinoLogger implements Logger {
   private readonly logger: PinoInstance;
 
   constructor() {
-    this.logger = pino();
+    const destination = resolve(process.cwd(), LOG_FILE_PATH);
+
+    const multiTransport = transport({
+      targets: [
+        {
+          target: 'pino/file',
+          options: { destination },
+          level: 'debug'
+        },
+        {
+          target: 'pino/file',
+          level: 'info',
+          options: {},
+        }
+      ],
+    });
+
+    this.logger = pino({}, multiTransport);
   }
 
   public debug(message: string, ...args: unknown[]): void {
