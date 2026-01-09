@@ -17,7 +17,8 @@
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
     "ts": "ts-node",
-    "json-server": "json-server --watch ./src/mocks/mock-server-data.json --port 3000"
+    "json-server": "json-server --watch ./src/mocks/mock-server-data.json --port 3000",
+    "docker-db-run": "docker compose --file ./docker-compose.dev.yml --env-file ./.env --project-name buy-and-sell up"
   },
   "devDependencies": {
     "@types/node": "24.1.0",
@@ -43,6 +44,7 @@
     "dayjs": "1.11.19",
     "dotenv": "17.2.3",
     "inversify": "7.10.8",
+    "mongoose": "9.1.2",
     "pino": "10.1.0",
     "reflect-metadata": "0.2.2",
     "zod": "4.3.5"
