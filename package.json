@@ -18,7 +18,9 @@
     "clean": "rimraf dist",
     "ts": "ts-node",
     "json-server": "json-server --watch ./src/mocks/mock-server-data.json --port 3000",
-    "docker-db-run": "docker compose --file ./docker-compose.dev.yml --env-file ./.env --project-name six-cities up"
+    "docker-db-run": "docker compose --file ./docker-compose.dev.yml --env-file ./.env --project-name six-cities up",
+    "generate-tsv-data": "npm run start-cli -- --generate 100 ./src/mocks/mock-data.tsv http://localhost:3000/api",
+    "generate-db": "npm run start-cli -- --import ./src/mocks/mock-data.tsv admin test localhost six-cities secret"
   },
   "devDependencies": {
     "@types/node": "24.1.0",

@@ -31,7 +31,7 @@ export type Offer = {
   type: OfferType
   rooms: number
   guests: number
-  author: User;
+  user: User;
   coordinates: Coordinates
   price: number;
 }
