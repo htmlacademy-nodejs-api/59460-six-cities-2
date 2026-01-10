@@ -5,12 +5,9 @@ import { Logger, PinoLogger } from '../shared/libs/logger/index.js';
 import { Config, RestConfig, RestSchema } from '../shared/libs/config/index.js';
 import { DatabaseClient, MongoDatabaseClient } from '../shared/libs/database-client/index.js';
 
-export function createRestApplicationContainer() {
-  return new ContainerModule(({ bind }) => {
-    bind<RestApplication>(Component.RestApplication).to(RestApplication).inSingletonScope();
-    bind<Logger>(Component.Logger).to(PinoLogger).inSingletonScope();
-    bind<Config<RestSchema>>(Component.Config).to(RestConfig).inSingletonScope();
-    bind<DatabaseClient>(Component.DatabaseClient).to(MongoDatabaseClient).inSingletonScope();
-  });
-
-}
+export const createRestApplicationContainer = () => new ContainerModule(({ bind }) => {
+  bind<RestApplication>(Component.RestApplication).to(RestApplication).inSingletonScope();
+  bind<Logger>(Component.Logger).to(PinoLogger).inSingletonScope();
+  bind<Config<RestSchema>>(Component.Config).to(RestConfig).inSingletonScope();
+  bind<DatabaseClient>(Component.DatabaseClient).to(MongoDatabaseClient).inSingletonScope();
+});
